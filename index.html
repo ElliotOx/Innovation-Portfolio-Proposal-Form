@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Oxford Innovation Portfolio — Course Proposal</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f9;margin:0;padding:0}
+.wrap{max-width:1000px;margin:40px auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
+h1{margin-top:0}
+.step{display:none}
+.step.active{display:block}
+label{display:block;margin-top:14px;font-weight:bold}
+input,textarea,select{width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:6px}
+textarea{min-height:80px}
+.buttons{margin-top:20px;display:flex;justify-content:space-between}
+button{padding:10px 18px;background:#002147;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.progress{height:6px;background:#ddd;margin-bottom:20px;border-radius:4px;overflow:hidden}
+.progress-bar{height:6px;background:#002147;width:0%}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Oxford Innovation Portfolio — Course Proposal</h1>
+
+<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+
+<form id="multiStepForm">
+
+<div class="step active">
+<h3>Page 1 — Course Approval</h3>
+<label>Course Approved by</label><input type="text" name="approvedBy">
+<label>Date</label><input type="date" name="approvalDate">
+</div>
+
+<div class="step">
+<h3>Page 2 — Course Details</h3>
+<label>Course Code</label><input type="text" name="courseCode">
+<label>Course Title</label><input type="text" name="courseTitle" required>
+<label>Division</label><input type="text" name="division">
+<label>Portfolio</label><input type="text" name="portfolio">
+<label>Format</label><input type="text" name="format">
+<label>Repeat Course?</label>
+<select name="repeatCourse"><option></option><option>YES</option><option>NO</option></select>
+<label>If YES, details</label><textarea name="repeatDetails"></textarea>
+</div>
+
+<div class="step">
+<h3>Page 3 — Tutor Details</h3>
+<label>Title</label><input type="text" name="tutorTitle">
+<label>First Name/s</label><input type="text" name="tutorFirst">
+<label>Last Name</label><input type="text" name="tutorLast">
+<label>Qualifications</label><input type="text" name="tutorQual">
+<label>Tutor Biography</label><textarea name="tutorBio"></textarea>
+</div>
+
+<div class="step">
+<h3>Page 4 — Course Description</h3>
+<label>Short Description</label><textarea name="shortDesc"></textarea>
+<label>Long Description</label><textarea name="longDesc"></textarea>
+</div>
+
+<div class="step">
+<h3>Page 5 — Programme Details</h3>
+<label>Term Starts</label><input type="text" name="termStarts">
+<label>Week 1</label><textarea name="week1"></textarea><label>Week 2</label><textarea name="week2"></textarea><label>Week 3</label><textarea name="week3"></textarea><label>Week 4</label><textarea name="week4"></textarea><label>Week 5</label><textarea name="week5"></textarea><label>Week 6</label><textarea name="week6"></textarea><label>Week 7</label><textarea name="week7"></textarea><label>Week 8</label><textarea name="week8"></textarea><label>Week 9</label><textarea name="week9"></textarea>
+</div>
+
+<div class="step">
+<h3>Page 6 — Course Aims & Objectives</h3>
+<label>Course Aim</label><textarea name="courseAim"></textarea>
+<label>Objective 1</label><input type="text" name="objective1">
+<label>Objective 2</label><input type="text" name="objective2">
+<label>Objective 3</label><input type="text" name="objective3">
+</div>
+
+<div class="step">
+<h3>Page 7 — Levels & Assessment</h3>
+<label>Background Knowledge Required</label><textarea name="background"></textarea>
+<label>Assessment Methods</label><textarea name="assessment"></textarea>
+<label>Teaching Methods</label><textarea name="teachingMethods"></textarea>
+<label>Teaching Outcome 1</label><input type="text" name="outcome1">
+<label>Teaching Outcome 2</label><input type="text" name="outcome2">
+<label>Teaching Outcome 3</label><input type="text" name="outcome3">
+</div>
+
+<div class="step">
+<h3>Page 8 — Illustration & QA</h3>
+<label>Illustration Included?</label>
+<select name="illustration"><option></option><option>YES</option><option>NO</option></select>
+<label>Image File / URL</label><input type="text" name="imageUrl">
+<label>VLE Deadline</label><input type="text" name="vleDeadline">
+<label>VLE Date</label><input type="date" name="vleDate">
+<label>Copyright/IP Check Date</label><input type="date" name="copyrightDate">
+<label>Quality Assurance Date</label><input type="date" name="qaDate">
+</div>
+
+<div class="buttons">
+<button type="button" onclick="prevStep()">Previous</button>
+<button type="button" onclick="nextStep()">Next</button>
+</div>
+
+</form>
+</div>
+
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll(".step");
+const progressBar = document.getElementById("progressBar");
+
+function showStep(index){
+steps.forEach((step,i)=>{
+step.classList.toggle("active", i===index);
+});
+progressBar.style.width = ((index+1)/steps.length)*100 + "%";
+}
+
+function nextStep(){
+if(currentStep < steps.length-1){
+currentStep++;
+showStep(currentStep);
+}
+}
+
+function prevStep(){
+if(currentStep > 0){
+currentStep--;
+showStep(currentStep);
+}
+}
+</script>
+
+</body>
+</html>
