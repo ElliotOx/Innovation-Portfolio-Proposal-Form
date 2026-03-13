@@ -3,132 +3,452 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Oxford Innovation Portfolio — Course Proposal</title>
+<title>Oxford IP Course Proposal — 5‑Page Form</title>
 <style>
-body{font-family:Arial,Helvetica,sans-serif;background:#f4f6f9;margin:0;padding:0}
-.wrap{max-width:1000px;margin:40px auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.08)}
-h1{margin-top:0}
-.step{display:none}
-.step.active{display:block}
-label{display:block;margin-top:14px;font-weight:bold}
-input,textarea,select{width:100%;padding:8px;margin-top:5px;border:1px solid #ccc;border-radius:6px}
-textarea{min-height:80px}
-.buttons{margin-top:20px;display:flex;justify-content:space-between}
-button{padding:10px 18px;background:#002147;color:#fff;border:none;border-radius:6px;cursor:pointer}
-.progress{height:6px;background:#ddd;margin-bottom:20px;border-radius:4px;overflow:hidden}
-.progress-bar{height:6px;background:#002147;width:0%}
+  :root{--accent:#0b5fff;--muted:#6b7280;--bg:#f7fafc}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; background:var(--bg); margin:0; color:#0b1220}
+  .container{max-width:980px;margin:28px auto;padding:20px}
+  .card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 8px 30px rgba(12,18,36,0.06)}
+  h1{margin:0 0 8px;font-size:20px}
+  .intro{color:var(--muted);font-size:13px;margin-bottom:16px}
+  .progress{height:10px;background:#e6e9ef;border-radius:999px;overflow:hidden;margin-bottom:16px}
+  .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#3b82f6);width:0%}
+  form{display:block}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+  label{display:block;font-weight:600;margin-bottom:6px;font-size:13px;color:#0f172a}
+  input[type="text"], input[type="date"], input[type="time"], textarea, select{
+    width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:8px;font-size:14px;background:#fff;
+  }
+  textarea{min-height:72px;resize:vertical}
+  .full{grid-column:1/-1}
+  .actions{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:16px}
+  .right{display:flex;gap:8px}
+  button{background:var(--accent);color:#fff;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+  button.ghost{background:#fff;border:1px solid #e6e9ef;color:#0b1220}
+  .small{font-size:13px;color:var(--muted)}
+  @media (max-width:760px){ .grid{grid-template-columns:1fr} .actions{flex-direction:column-reverse} }
+  footer{margin-top:12px;text-align:right;color:var(--muted);font-size:13px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1>Oxford Innovation Portfolio — Course Proposal</h1>
+  <div class="container">
+    <div class="card" role="main" aria-labelledby="title">
+      <header>
+        <h1 id="title">Oxford — IP Course Proposal (5‑page)</h1>
+        <div class="intro">All questions are included verbatim and split across 5 pages for easier completion. Optional: paste a Google Apps Script/Webhook URL on the final page to POST responses as JSON.</div>
+      </header>
 
-<div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+      <div class="progress" aria-hidden="true"><i id="prog"></i></div>
 
-<form id="multiStepForm">
+      <form id="form" autocomplete="off" novalidate>
+        <!-- PAGE 1: Course details, Course Title... -->
+        <section class="page" data-page="1">
+          <div class="step-title"><strong>Page 1 — Course details</strong></div>
+          <div class="grid">
+            <div class="full">
+              <label>Course details</label>
+              <input type="text" name="course_details" placeholder="Course details">
+            </div>
 
-<div class="step active">
-<h3>Page 1 — Course Approval</h3>
-<label>Course Approved by</label><input type="text" name="approvedBy">
-<label>Date</label><input type="date" name="approvalDate">
-</div>
+            <div class="full">
+              <label>Course Title</label>
+              <input type="text" name="course_title" placeholder="Course Title">
+            </div>
 
-<div class="step">
-<h3>Page 2 — Course Details</h3>
-<label>Course Code</label><input type="text" name="courseCode">
-<label>Course Title</label><input type="text" name="courseTitle" required>
-<label>Division</label><input type="text" name="division">
-<label>Portfolio</label><input type="text" name="portfolio">
-<label>Format</label><input type="text" name="format">
-<label>Repeat Course?</label>
-<select name="repeatCourse"><option></option><option>YES</option><option>NO</option></select>
-<label>If YES, details</label><textarea name="repeatDetails"></textarea>
-</div>
+            <div>
+              <label>Division</label>
+              <input type="text" name="division">
+            </div>
 
-<div class="step">
-<h3>Page 3 — Tutor Details</h3>
-<label>Title</label><input type="text" name="tutorTitle">
-<label>First Name/s</label><input type="text" name="tutorFirst">
-<label>Last Name</label><input type="text" name="tutorLast">
-<label>Qualifications</label><input type="text" name="tutorQual">
-<label>Tutor Biography</label><textarea name="tutorBio"></textarea>
-</div>
+            <div>
+              <label>Portfolio</label>
+              <input type="text" name="portfolio">
+            </div>
 
-<div class="step">
-<h3>Page 4 — Course Description</h3>
-<label>Short Description</label><textarea name="shortDesc"></textarea>
-<label>Long Description</label><textarea name="longDesc"></textarea>
-</div>
+            <div>
+              <label>Format</label>
+              <input type="text" name="format">
+            </div>
 
-<div class="step">
-<h3>Page 5 — Programme Details</h3>
-<label>Term Starts</label><input type="text" name="termStarts">
-<label>Week 1</label><textarea name="week1"></textarea><label>Week 2</label><textarea name="week2"></textarea><label>Week 3</label><textarea name="week3"></textarea><label>Week 4</label><textarea name="week4"></textarea><label>Week 5</label><textarea name="week5"></textarea><label>Week 6</label><textarea name="week6"></textarea><label>Week 7</label><textarea name="week7"></textarea><label>Week 8</label><textarea name="week8"></textarea><label>Week 9</label><textarea name="week9"></textarea>
-</div>
+            <div>
+              <label>Repeat Course?</label>
+              <select name="repeat_course"><option value=""></option><option>YES</option><option>NO</option></select>
+            </div>
 
-<div class="step">
-<h3>Page 6 — Course Aims & Objectives</h3>
-<label>Course Aim</label><textarea name="courseAim"></textarea>
-<label>Objective 1</label><input type="text" name="objective1">
-<label>Objective 2</label><input type="text" name="objective2">
-<label>Objective 3</label><input type="text" name="objective3">
-</div>
+            <div class="full">
+              <label>If YES, details</label>
+              <textarea name="repeat_if_yes"></textarea>
+            </div>
 
-<div class="step">
-<h3>Page 7 — Levels & Assessment</h3>
-<label>Background Knowledge Required</label><textarea name="background"></textarea>
-<label>Assessment Methods</label><textarea name="assessment"></textarea>
-<label>Teaching Methods</label><textarea name="teachingMethods"></textarea>
-<label>Teaching Outcome 1</label><input type="text" name="outcome1">
-<label>Teaching Outcome 2</label><input type="text" name="outcome2">
-<label>Teaching Outcome 3</label><input type="text" name="outcome3">
-</div>
+            <div>
+              <label>CCI</label>
+              <input type="text" name="cci">
+            </div>
 
-<div class="step">
-<h3>Page 8 — Illustration & QA</h3>
-<label>Illustration Included?</label>
-<select name="illustration"><option></option><option>YES</option><option>NO</option></select>
-<label>Image File / URL</label><input type="text" name="imageUrl">
-<label>VLE Deadline</label><input type="text" name="vleDeadline">
-<label>VLE Date</label><input type="date" name="vleDate">
-<label>Copyright/IP Check Date</label><input type="date" name="copyrightDate">
-<label>Quality Assurance Date</label><input type="date" name="qaDate">
-</div>
+            <div>
+              <label>Contract type</label>
+              <input type="text" name="contract_type">
+            </div>
 
-<div class="buttons">
-<button type="button" onclick="prevStep()">Previous</button>
-<button type="button" onclick="nextStep()">Next</button>
-</div>
+            <div>
+              <label>VLE Population deadline</label>
+              <input type="text" name="vle_population_deadline">
+            </div>
 
-</form>
-</div>
+            <div>
+              <label>Schedule of work</label>
+              <input type="text" name="schedule_of_work">
+            </div>
+
+            <div>
+              <label>SSO Required</label>
+              <input type="text" name="sso_required">
+            </div>
+
+            <div>
+              <label>Copyright and IP clearance</label>
+              <input type="text" name="copyright_ip_clearance">
+            </div>
+
+            <div class="full">
+              <label>Course Image</label>
+              <input type="text" name="course_image" placeholder="file name or URL">
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 2: Tutor Details, Class details -->
+        <section class="page" data-page="2" style="display:none">
+          <div class="step-title"><strong>Page 2 — Tutor Details & Class details</strong></div>
+          <div class="grid">
+            <div>
+              <label>Tutor Details</label>
+              <input type="text" name="tutor_details" placeholder="Tutor Details">
+            </div>
+
+            <div>
+              <label>Title</label>
+              <input type="text" name="tutor_title">
+            </div>
+
+            <div>
+              <label>First Name/s</label>
+              <input type="text" name="tutor_first">
+            </div>
+
+            <div>
+              <label>Last Name</label>
+              <input type="text" name="tutor_last">
+            </div>
+
+            <div>
+              <label>Qualifications</label>
+              <input type="text" name="tutor_qualifications">
+            </div>
+
+            <div class="full">
+              <label>Tutor Biography</label>
+              <textarea name="tutor_biography"></textarea>
+            </div>
+
+            <div class="full"><hr></div>
+
+            <div>
+              <label>Class details</label>
+              <input type="text" name="class_details" placeholder="Class details">
+            </div>
+
+            <div>
+              <label>Term 1 Dates</label>
+              <input type="text" name="term1_dates">
+            </div>
+
+            <div>
+              <label>Time</label>
+              <input type="time" name="class_time">
+            </div>
+
+            <div>
+              <label>Length of Meeting</label>
+              <input type="text" name="length_of_meeting">
+            </div>
+
+            <div>
+              <label>No. Meetings</label>
+              <input type="text" name="no_meetings">
+            </div>
+
+            <div>
+              <label>Day</label>
+              <input type="text" name="class_day">
+            </div>
+
+            <div>
+              <label>Class Maximum</label>
+              <input type="text" name="class_maximum">
+            </div>
+
+            <div>
+              <label>Fee</label>
+              <input type="text" name="fee">
+            </div>
+
+            <div>
+              <label>Finance code</label>
+              <input type="text" name="finance_code">
+            </div>
+
+            <div>
+              <label>CATS Points at FHEQ 4 (if applicable)</label>
+              <input type="text" name="cats_points">
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 3: Short & Long Description; Programme Details Weeks 1-10 -->
+        <section class="page" data-page="3" style="display:none">
+          <div class="step-title"><strong>Page 3 — Descriptions & Programme Details</strong></div>
+          <div class="grid">
+            <div class="full">
+              <label>Short Description (Snippet) (~30-40 words please. Limited to 255 character)</label>
+              <textarea name="short_description" maxlength="255"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Long Description (Overview) (used for the website)</label>
+              <textarea name="long_description"></textarea>
+            </div>
+
+            <div class="full"><hr></div>
+
+            <div>
+              <label>Programme Details - Term Start date</label>
+              <input type="date" name="programme_term_start">
+            </div>
+
+            <!-- Weeks 1..10 -->
+            <div class="full" id="weeksContainer"></div>
+          </div>
+        </section>
+
+        <!-- PAGE 4: Aims, Objectives, Levels, Assessment, Teaching, Outcomes -->
+        <section class="page" data-page="4" style="display:none">
+          <div class="step-title"><strong>Page 4 — Aims, Objectives, Assessment & Teaching</strong></div>
+          <div class="grid">
+            <div class="full">
+              <label>Course Aim (Brief statement defining the aim of the course)</label>
+              <textarea name="course_aim"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Course Objectives (Please try to limit to three, numbered objectives)</label>
+            </div>
+            <div class="full">
+              <label>1</label>
+              <input type="text" name="objective_1">
+            </div>
+            <div class="full">
+              <label>2</label>
+              <input type="text" name="objective_2">
+            </div>
+            <div class="full">
+              <label>3</label>
+              <input type="text" name="objective_3">
+            </div>
+
+            <div class="full">
+              <label>Levels and Demands (If your students require some background knowledge or experience in your subject area before they start the course, please provide a brief description of what that may be)</label>
+              <textarea name="levels_and_demands"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Assessment and Teaching - Assessment Methods (Please describe the coursework with which you will assess student achievement of your intended learning outcomes. If using the portfolio option (Option A), please indicate the number of elements (max. 5))</label>
+              <textarea name="assessment_methods"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Teaching Methods</label>
+              <textarea name="teaching_methods"></textarea>
+            </div>
+
+            <div class="full">
+              <label>Teaching Outcomes (try to limit these to three short statements)</label>
+            </div>
+
+            <div class="full">
+              <label>- 1</label>
+              <input type="text" name="teaching_outcome_1">
+            </div>
+            <div class="full">
+              <label>- 2</label>
+              <input type="text" name="teaching_outcome_2">
+            </div>
+            <div class="full">
+              <label>- 3</label>
+              <input type="text" name="teaching_outcome_3">
+            </div>
+          </div>
+        </section>
+
+        <!-- PAGE 5: Quality Assurance -->
+        <section class="page" data-page="5" style="display:none">
+          <div class="step-title"><strong>Page 5 — Quality Assurance</strong></div>
+          <div class="grid">
+            <div class="full">
+              <label>5. Quality Assurance</label>
+              <input type="text" name="quality_assurance_label" value="5. Quality Assurance">
+            </div>
+
+            <div>
+              <label>Date checked</label>
+              <input type="date" name="qa_date_checked">
+            </div>
+
+            <div class="full">
+              <label>Signed off by (signature/print name)</label>
+              <input type="text" name="qa_signed_off_by" placeholder="Signature / Print name">
+            </div>
+
+            <div class="full" style="margin-top:12px">
+              <label>Optional: Webhook / Apps Script URL (paste URL here to POST JSON on submit)</label>
+              <input type="text" name="webhook_url" placeholder="https://script.google.com/macros/s/...">
+              <div class="small">If left empty, submission will download as a CSV file.</div>
+            </div>
+
+            <div class="full actions" style="margin-top:8px">
+              <div><button type="button" id="prevBtn" class="ghost">← Previous</button></div>
+              <div class="right">
+                <button type="button" id="downloadBtn" class="ghost">Download CSV Template</button>
+                <button type="submit" id="submitBtn">Submit</button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </form>
+
+      <div id="message" class="small" style="margin-top:12px"></div>
+
+      <footer>
+        <div class="small">Source: IP Proposal Form 2 — included verbatim. fileciteturn1file0</div>
+      </footer>
+    </div>
+  </div>
 
 <script>
-let currentStep = 0;
-const steps = document.querySelectorAll(".step");
-const progressBar = document.getElementById("progressBar");
+  // Render weeks 1..10 inside page 3
+  (function(){
+    const weeksHolder = document.getElementById('weeksContainer');
+    let html = '';
+    for(let i=1;i<=10;i++){
+      html += '<label>Week ' + i + '</label><textarea name="week' + i + '"></textarea>';
+    }
+    weeksHolder.innerHTML = html;
+  })();
 
-function showStep(index){
-steps.forEach((step,i)=>{
-step.classList.toggle("active", i===index);
-});
-progressBar.style.width = ((index+1)/steps.length)*100 + "%";
-}
+  // Multi‑page navigation
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const prog = document.getElementById('prog');
+  let current = 0;
+  function show(n){
+    pages.forEach((p,i)=> p.style.display = i===n ? 'block' : 'none');
+    current = n;
+    const pct = Math.round(((n+1)/pages.length)*100);
+    prog.style.width = pct + '%';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  show(0);
 
-function nextStep(){
-if(currentStep < steps.length-1){
-currentStep++;
-showStep(currentStep);
-}
-}
+  document.getElementById('prevBtn')?.addEventListener('click', ()=> show(Math.max(0,current-1)));
+  // next: attach programmatically to each page (simple: go to next)
+  pages.forEach((page, idx)=>{
+    // add Next button unless last page
+    if (idx < pages.length - 1){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = 'Next →';
+      btn.style.marginTop = '12px';
+      btn.className = 'ghost';
+      btn.addEventListener('click', ()=> show(Math.min(pages.length-1, current+1)));
+      page.appendChild(btn);
+    }
+  });
 
-function prevStep(){
-if(currentStep > 0){
-currentStep--;
-showStep(currentStep);
-}
-}
+  // collect form data in order of appearance
+  function collect(){
+    const out = {};
+    const elems = document.querySelectorAll('#form input, #form textarea, #form select');
+    elems.forEach(el=>{
+      if (!el.name) return;
+      out[el.name] = el.value || '';
+    });
+    return out;
+  }
+
+  function csvFromObj(obj){
+    const headers = Object.keys(obj);
+    const lines = [];
+    lines.push(headers.map(h => '"' + h.replace(/"/g,'""') + '"').join(','));
+    const row = headers.map(h => '"' + String(obj[h]).replace(/"/g,'""') + '"').join(',');
+    lines.push(row);
+    return lines.join('\n') + '\n';
+  }
+
+  document.getElementById('downloadBtn').addEventListener('click', ()=>{
+    const sample = collect();
+    // blank values
+    Object.keys(sample).forEach(k=> sample[k]='');
+    const csv = csvFromObj(sample);
+    const blob = new Blob([csv], {type:'text/csv'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a'); a.href = url; a.download = 'oxford-ip-proposal-template.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    document.getElementById('message').textContent = 'Template downloaded.';
+  });
+
+  // submit handler: POST to webhook if provided, else download CSV
+  document.getElementById('form').addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const data = collect();
+    const webhook = (data.webhook_url || '').trim();
+    document.getElementById('message').textContent = '';
+    // simple required check for course_title
+    if (!data.course_title || data.course_title.trim()===''){
+      document.getElementById('message').textContent = 'Please enter Course Title before submitting.';
+      show(0); // go to first page where title is
+      return;
+    }
+
+    if (webhook){
+      try{
+        document.getElementById('message').textContent = 'Sending to webhook...';
+        const res = await fetch(webhook, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data)});
+        if (res.ok){
+          document.getElementById('message').textContent = 'Submission sent successfully.';
+        } else {
+          document.getElementById('message').textContent = 'Webhook returned status ' + res.status + '. CSV fallback will download.';
+          const csv = csvFromObj(data);
+          const blob = new Blob([csv], {type:'text/csv'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a'); a.href = url; a.download = 'oxford-ip-proposal-submission.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        }
+      } catch(err){
+        document.getElementById('message').textContent = 'Failed to send to webhook; CSV downloaded as fallback.';
+        const csv = csvFromObj(data);
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a'); a.href = url; a.download = 'oxford-ip-proposal-submission.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      }
+    } else {
+      const csv = csvFromObj(data);
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a'); a.href = url; a.download = 'oxford-ip-proposal-submission.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      document.getElementById('message').textContent = 'CSV downloaded. Please forward or save as required.';
+    }
+    // reset form & go to first page
+    document.getElementById('form').reset();
+    show(0);
+  });
 </script>
-
 </body>
 </html>
